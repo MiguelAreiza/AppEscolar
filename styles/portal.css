@@ -33,7 +33,7 @@
     margin: auto;
     border: none;
     background: transparent;
-    background-image: url('../Images/Home.png');
+    background-image: url('../Images/Logout.png');
     background-size: 100% 100%;
     transition: .6s;
 }
@@ -54,7 +54,7 @@
     margin: auto;
     border: none;
     background: transparent;
-    background-image: url('../Images/NewUser.png');
+    background-image: url('../Images/Setting.png');
     background-size: 100% 100%;
     transition: .6s;
 }

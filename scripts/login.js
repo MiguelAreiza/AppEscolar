@@ -1,24 +1,24 @@
 'use strict';
 $(document).ready(()=>{
     sessionStorage.removeItem('AppUser');
-    
+
     CreateMsj('success', 'Ingresa tus credenciales');
     
     $('#btnHome').click(()=>{
         location.href = '../';
-    })
+    });
 
     $('.facebook').click(()=>{
         window.open('https://www.facebook.com/miguelangel.areizaberrio');
-    })
+    });
 
     $('.instagram').click(()=>{
         window.open('https://www.instagram.com/areizam11/');
-    })
+    });
 
     $('.whatsApp').click(()=>{
         window.open('https://api.whatsapp.com/send?phone=573245026814&text=');
-    })
+    });
 
     $('#btnLogin').click(()=>{
         const user = $('#userLogin').val();
