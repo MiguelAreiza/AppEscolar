@@ -3,7 +3,7 @@ $(document).ready(()=>{
     CreateMsj('success', 'Vienvenido a App Escolar');
     
     $('#btnLogin').click(()=>{
-        location.href = './views/login/';
+        location.href = './views/login/index.html';
     });
 
     $('.facebook').click(()=>{
