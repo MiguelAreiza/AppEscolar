@@ -26,23 +26,23 @@ $(document).ready(()=>{
             CreateMsj('error', 'Completa los campos')
         } else {
 
-            axios({
-                method: 'post',
-                url: 'https://apimaddiapp.azurewebsites.net/Api/ValidateUser',
-                data: {
-                    "User": "danny@madi.com",
-                    "Pass": "qwert.12345"
+            var settings = {
+                "url": "https://apimaddiapp.azurewebsites.net/Api/ValidateUser",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                  "Cookie": "ARRAffinity=6a270dbba5434c2a5ff0a8fedf177f807cfedd4e993c22bb29e8bae947d307d8; ARRAffinitySameSite=6a270dbba5434c2a5ff0a8fedf177f807cfedd4e993c22bb29e8bae947d307d8"
+                },
+                "data": {
+                  "User": "danny@madi.com",
+                  "Pass": "qwert.12345"
                 }
-            });
-
-            axios.post('https://apimaddiapp.azurewebsites.net/Api/ValidateUser', {
-                "User": "danny@madi.com",
-                "Pass": "qwert.12345"
-            }).then(function (response) {
+              };
+              
+              $.ajax(settings).done(function (response) {
                 console.log(response);
-            }).catch(function (error) {
-                console.log(error);
-            });
+              });
 
         }
     })
