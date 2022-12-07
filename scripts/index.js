@@ -1,5 +1,6 @@
 'use strict';
 $(document).ready(()=>{
+    sessionStorage.removeItem('AppUser');
     CreateMsj('success', 'Vienvenido a App Escolar');
     
     $('#btnLogin').click(()=>{

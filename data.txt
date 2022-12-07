@@ -1,0 +1,18 @@
+{
+    "users":[
+        {
+            "id": "2Mj3-1Xq8-1Co5",
+            "user": "natalia@appescolar.com",
+            "pass": "qwert.12345",
+            "name": "Natalia Andrea",
+            "acti": "true"
+        },
+        {
+            "id": "7Wb6-7Iy6-4Ot3",
+            "user": "admin@appescolar.com",
+            "pass": "qwert.12345",
+            "name": "Admin",
+            "acti": "true"
+        }
+    ]
+}

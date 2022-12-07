@@ -1,5 +1,7 @@
 'use strict';
 $(document).ready(()=>{
+    sessionStorage.removeItem('AppUser');
+    
     CreateMsj('success', 'Ingresa tus credenciales');
     
     $('#btnHome').click(()=>{
@@ -25,26 +27,34 @@ $(document).ready(()=>{
         if (user === '' || pass === '') {
             CreateMsj('error', 'Completa los campos')
         } else {
-
-            var datos = {
-                "User":"danny@madi.com",
-                "Pass":"qwert.12345"
-            };
             
             $.ajax({
-                async: false,
-                method: "POST",
-                url: "https://apimaddiapp.azurewebsites.net/Api/ValidateUser",
-                data: datos,
-                success: function (response) {
-                    console.log(response);
-                },
-                error: function (error) {
-                    console.log(error)
-                },
-                 
-            });
+                url : '../data.txt',
+                dataType: "text",
+                success : function (data)         
+                {
+                    let users = JSON.parse(data).users
 
+                    for (let i = 0; i < users.length; i++) {                        
+                        if (users[i].user == user && users[i].pass == pass) {
+                            CreateMsj('success', 'Validacion exitosa');
+                            let AppUser = [{id:users[i].id,
+                                            user:users[i].user,
+                                            name:users[i].name,
+                                            activo:users[i].acti}];
+                            sessionStorage.setItem('AppUser', JSON.stringify(AppUser));
+                            location.href = './portal.html'
+                            break;
+                        }else if (i == (users.length - 1)) {
+                            CreateMsj('error', 'usuario no registrado');
+                        }                        
+                    }
+                },
+                error: function (error) 
+                {
+                    CreateMsj('error', 'Ocurrio un error')
+                },                 
+            });
         }
     })
 
@@ -95,6 +105,6 @@ $(document).ready(()=>{
                 Codigo += `-`;
             }
         }
-        return Codigo;
+        return Codigo; 
     }
 })
