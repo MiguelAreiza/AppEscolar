@@ -3,7 +3,7 @@ $(document).ready(()=>{
     CreateMsj('success', 'Ingresa tus credenciales');
     
     $('#btnHome').click(()=>{
-        location.href = '/AppEscolar/';
+        location.href = '../';
     })
 
     $('.facebook').click(()=>{
