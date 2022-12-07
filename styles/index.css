@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Merienda One', cursive;
+}
+#Notificacion{
+    display: none;
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 500;
+    bottom: 1vh;
+    right: 1vw;
+    font-size: 3vh;
+    font-weight: bold;
+    border-radius: 2vh 2vh 0 2vh;
+    padding: 1vh 2vh;
+    box-shadow: 3px 3px 8px #555;
+    transition: .6s;
+}
+.base{
+
+}
+.navBar{
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #af13f2;
+    width: 100vw;
+    height: 80px;
+}
+.pageContent{
+    margin-top: 80px;
+}.footer{
+
+}
