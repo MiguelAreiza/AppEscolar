@@ -32,7 +32,7 @@
     margin: auto;
     border: none;
     background: transparent;
-    background-image: url('../Images/login.png');
+    background-image: url('../Images/Login.png');
     background-size: 100% 100%;
     transition: .6s;
 }
