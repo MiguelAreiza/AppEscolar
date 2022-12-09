@@ -1,7 +1,7 @@
 'use strict';
 $(document).ready(()=>{
     sessionStorage.removeItem('AppUser');
-    CreateMsj('success', 'Vienvenido a App Escolar');
+    CreateMsj('success', 'Bienvenido a App Escolar');
     
     $('#btnLogin').click(()=>{
         location.href = './views/login.html';
