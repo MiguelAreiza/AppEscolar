@@ -36,8 +36,8 @@ fetch('../../data.txt').then(async (response) => {
 $(document).ready(()=>{
 
     $('#btnLogOut').click(()=>{
-        history.pushState(null, "", "../views/login/");
-        goLocation.ChangeView('./');
+        history.pushState(null, "", "../login/");
+        goLocation.ChangeView('../login/');
     });
 
     $('.facebook').click(()=>{
