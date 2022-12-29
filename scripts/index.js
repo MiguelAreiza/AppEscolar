@@ -2,7 +2,7 @@
 $(document).ready(()=>{
         
     sessionStorage.removeItem('AppUser');
-    toastr.Success('Bienvenido miguel');
+    toastr.Success('Bienvenido');
         
     $('#btnLogin').click(()=>{
         
