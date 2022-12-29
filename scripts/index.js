@@ -7,7 +7,7 @@ $(document).ready(()=>{
     $('#btnLogin').click(()=>{
         
         history.pushState(null, "", "./views/login/");        
-        goLocation.ChangeView('/views/login');
+        goLocation.ChangeView('./');
 
     });
 
