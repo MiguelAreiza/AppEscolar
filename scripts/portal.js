@@ -25,7 +25,7 @@ fetch('../../data.txt').then(async (response) => {
 
         toastr.Warning('Logueate primero para iniciar');
         history.pushState(null, "", "../login/");
-        goLocation.ChangeView('../../views/login/');
+        goLocation.ChangeView('../login/');
 
     }
     
@@ -36,8 +36,8 @@ fetch('../../data.txt').then(async (response) => {
 $(document).ready(()=>{
 
     $('#btnLogOut').click(()=>{
-        history.pushState(null, "", "./login");
-        goLocation.ChangeView('../../views/login');
+        history.pushState(null, "", "../views/login/");
+        goLocation.ChangeView('./');
     });
 
     $('.facebook').click(()=>{

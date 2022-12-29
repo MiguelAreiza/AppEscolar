@@ -8,7 +8,7 @@ $(document).ready(()=>{
     $('#btnHome').click(()=>{
 
         history.pushState(null, "", "../../");        
-        goLocation.ChangeView('../../');
+        goLocation.ChangeView('./');
 
     });
 
