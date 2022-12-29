@@ -1,0 +1,44 @@
+#notifications{
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 9999999;
+    pointer-events: none;
+    bottom: 12px;
+    right: 12px;
+}
+#notifications .toast{
+    box-sizing: border-box;
+    position: relative;
+    margin: 0 0 6px;
+    padding: 15px 15px 15px 50px;
+    width: 300px;
+    border-radius: 1vh;
+    background-position: 15px;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    box-shadow: 0 0 12px #000;
+    color: #fff;
+    pointer-events: auto;
+    contain: content;
+    word-wrap: break-word;
+}
+#notifications .toast:hover{
+    box-shadow: 0 0 12px #999;
+    cursor: pointer;
+}
+.toast-info{
+    background: #2aa3c3;
+    background-image: url('../Images/Info.png');
+}
+.toast-success{
+    background: #129620;
+    background-image: url('../Images/Success.png');
+}
+.toast-error{
+    background: #c53002;
+    background-image: url('../Images/Error.png');
+}
+.toast-warning{
+    background: #ffa300;
+    background-image: url('../Images/Warning.png');
+}

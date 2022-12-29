@@ -13,25 +13,17 @@
     <div class="base">
         <div class="navBar">
             <div class="left">
-                <button type="button" id="btnHome"></button>
+                <button type="button" id="btnLogOut"></button>
             </div>
             <div class="center">
-                <label>Login App Escolar</label>             
+                <label id="nameUser"></label>             
             </div>
             <div class="rigth">
-                <button type="button" id="btnNewUser"></button>
+                <button type="button" id="btnSettings"></button>
             </div>            
         </div>
         <div class="pageContent">
-            <div class="cardLogin">
-                <label class="text">Ingresar</label>
-                <label id="msjLogin"></label>
-                <form>
-                    <input id="userLogin" type="text" placeholder="Usuario" required>
-                    <input id="passLogin" type="password" placeholder="Contraseña" required>
-                    <button type="submit" id="btnLogin">Login</button>
-                </form>
-            </div>
+
         </div>
         <div class="footer">
             <div class="contactUs">
@@ -51,8 +43,14 @@
         </div>
     </div>
     <div id="notifications">
+
     </div>
-    <link rel="stylesheet" href="../styles/login.css">
-    <script src="../scripts/login.js"></script>
+    <!-- Generales -->
+    <script src="../../scripts/General.js"></script>
+    <link rel="stylesheet" href="../../styles/General.css">
+    
+    <!-- Propios -->
+    <link rel="stylesheet" href="../../styles/portal.css">
+    <script src="../../scripts/portal.js"></script>
 </body>
 </html>

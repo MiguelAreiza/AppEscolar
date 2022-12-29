@@ -127,24 +127,3 @@
     font-family: Arial, Helvetica, sans-serif;
     padding: 10px 5px 5px 0;
 }
-#notifications{
-    box-sizing: border-box;
-    max-width: 230px;
-    position: fixed;
-    z-index: 500;
-    bottom: 1vh;
-    right: 1vh;
-}
-#notifications .toast{
-    margin-top: 1vh;
-    font-size: medium;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    border-radius: 2vh 2vh 0 2vh;
-    padding: 1vh 2vh;
-    box-shadow: 3px 3px 8px #555;
-    transition: .6s;
-}
-#notifications .toast:hover{
-    opacity: .9;
-}
