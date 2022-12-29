@@ -2,13 +2,15 @@
     "users":[
         {
             "id": "2Mj3-1Xq8-1Co5",
-            "user": "natalia@appescolar.com",
+            "rolId": "1Ha8-3Bm4-2Pp4",
+            "user": "alumno@appescolar.com",
             "pass": "qwert.12345",
             "name": "Natalia Andrea",
             "acti": "true"
         },
         {
-            "id": "7Wb6-7Iy6-4Ot3",
+            "id": "7Wb6-7Iy6-4Ot3",            
+            "rolId": "1Xh7-6Ki3-2Kv6",
             "user": "admin@appescolar.com",
             "pass": "qwert.12345",
             "name": "Admin",

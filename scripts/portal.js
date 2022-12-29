@@ -40,6 +40,43 @@ $(document).ready(()=>{
         goLocation.ChangeView('../login/');
     });
 
+    $('#btnSettings').click(() => {
+        
+        if ($('#menuOpciones').css('height') == '0px') {
+
+            $('#menuOpciones').css('height', '100%');  
+
+        }  else {
+             
+            $('#menuOpciones').css('height', '0'); 
+
+        }     
+        
+    });
+
+    $('#btnAvatares').click(() => {
+                
+        $('#menuOpciones').css('height', '0');
+        
+        let html = ``;
+        for (let i = 1; i <= 56; i++) {
+            html += `<img id="avatar${i}" src="../../Images/Avatars/Avatar${i}.png" alt="Avatar ${i}" draggable="false">`
+        }
+
+        $('#avatares').html(html);
+
+        for (let i = 1; i <= 56; i++) {
+            $(`#avatar${i}`).click(() => {
+                $('.telon').hide();
+                $('.personajes').hide();
+                toastr.Success('Magnífica elección')
+            })
+        }
+        $('.telon').show();
+        $('.personajes').show();
+        
+    });
+
     $('.facebook').click(()=>{
         redirect.Facebook();
     });
