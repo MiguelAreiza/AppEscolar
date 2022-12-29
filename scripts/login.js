@@ -44,8 +44,8 @@ $(document).ready(()=>{
                                 activo:users[0].acti}];
                 sessionStorage.setItem('AppUser', JSON.stringify(AppUser));
                 // location.href = './portal.html'
-                history.pushState(null, "", "../portal");        
-                goLocation.ChangeView('./portal');
+                history.pushState(null, "", "../portal/");        
+                goLocation.ChangeView('./');
 
             } else {
                 toastr.Warning('Usuario no registrado');
