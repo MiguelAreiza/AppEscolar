@@ -39,7 +39,7 @@
 
 /* Estilos del pagecontent */
 .pageContent{
-    background-image: url('../Images/Fondo.png');
+    background-image: url('../Images/Fondos/Fondo.png');
     background-size: contain;
     margin-top: 12vh;
     padding: 2vh;

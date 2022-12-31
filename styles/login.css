@@ -22,7 +22,7 @@
     margin-top: 5vh;
     padding: 1vh;
     border-radius: 5vh;
-    background-image: url('../Images/FondoLogin.png');
+    background-image: url('../Images/Fondos/FondoLogin.png');
     background-size: 100% 100%;
 }
 .cardLogin > .text{
