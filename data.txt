@@ -3,8 +3,8 @@
         {
             "id": "2Mj3-1Xq8-1Co5",
             "rolId": "1Ha8-3Bm4-2Pp4",
-            "user": "alumno@appescolar.com",
-            "pass": "qwert.12345",
+            "user": "natalia@appescolar.com",
+            "pass": "natalia",
             "name": "Natalia Andrea",
             "acti": "true"
         },
