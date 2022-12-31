@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Escolar</title>
-    <link rel="shortcut icon" href="../../Images/icono.png">
+    <link rel="shortcut icon" href="../../Images/Icono.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js" integrity="sha512-CX7sDOp7UTAq+i1FYIlf9Uo27x4os+kGeoT7rgwvY+4dmjqV0IuE/Bl5hVsjnQPQiTOhAX1O2r2j5bjsFBvv/A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link href="https://fonts.googleapis.com/css2?family=Merienda+One&display=swap" rel="stylesheet">
 </head>
@@ -20,8 +20,11 @@
             </div>
             <div class="rigth">
                 <button type="button" id="btnSettings"></button>
-                <div id="menuOpciones">
+                <div id="menu">
                     <button type="button" id="btnAvatares"></button>
+                    <button type="button" id="btnInsignias"></button>
+                    <button type="button" id="btnPoderes"></button>
+                    <button type="button" id="btnTienda"></button>
                 </div>
             </div>            
         </div>
@@ -48,6 +51,48 @@
     <div class="personajes">
         <label class="text">Es hora de elegir tu personaje</label>
         <div id="avatares">
+            
+        </div>
+    </div>
+    <div class="insignias">
+        <button id="btnAtras"></button>
+        <label class="text">Es hora de ver tu progreso</label>
+        <div id="insignias">
+            <div class="insCalidad" >
+                <div>
+                    <label class="cantidad">0</label>
+                    <label class="titulo">Insignia de la calidad</label>
+                </div>
+                <img id="insCalidad" src="../../Images/Insignias/InsigniaCalidad.png" alt="insignia de la calidad">
+            </div>
+            <div class="insTiempo" >
+                <div>
+                    <label class="cantidad">0</label>
+                    <label class="titulo">Insignia del tiempo</label>
+                </div>
+                <img id="insTiempo" src="../../Images/Insignias/InsigniaTiempo.png" alt="insignia del tiempo">
+            </div>
+            <div class="insEquipo" >
+                <div>
+                    <label class="cantidad">0</label>
+                    <label class="titulo">Insignia del trabajo en equipo</label>
+                </div>
+                <img id="insEquipo" src="../../Images/Insignias/InsigniaEquipo.png" alt="insignia del trabajo en equipo">
+            </div>
+        </div>
+    </div>
+    <div class="poderes">
+        <button id="btnAtras"></button>
+        <label class="text">Es hora de ver que poderes has desbloqueado</label>
+        <div id="poderes">
+            
+        </div>
+    </div>
+    <div class="tienda">
+        <button id="btnAtras"></button>
+        <label class="text">Es hora de ver que poderes reclamar</label>
+        <div id="tienda">
+            
         </div>
     </div>
     <div class="telon"></div>

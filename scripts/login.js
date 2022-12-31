@@ -25,10 +25,10 @@ $(document).ready(()=>{
 
         e.preventDefault();
 
-        const USER = $('#userLogin').val();
-        const PASS = $('#passLogin').val();
-        $('#userLogin').val('');
-        $('#passLogin').val('');
+        const USER = e.target[0].value;
+        const PASS = e.target[1].value;
+        e.target[0].value = '';
+        e.target[1].value = '';
 
         fetch('../../data.txt').then(async (response) => {
 

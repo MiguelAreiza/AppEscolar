@@ -2,11 +2,11 @@
 function Redirect() {
 
     this.Facebook = () => {
-        window.open('https://www.facebook.com/miguelangel.areizaberrio');
+        window.open('https://www.facebook.com/natalia.areizavalencia/');
     }
 
     this.Instagram = () => {
-        window.open('https://www.instagram.com/areizam11/');
+        window.open('https://www.instagram.com/natyareiza85/');
     }
 
     this.WhatsApp = () => {
@@ -17,27 +17,31 @@ function Redirect() {
 
 function Toastr() {
 
-    this.Info = (mesagge) => { 
-        newMesagge(mesagge, 'toast-info', newId());
+    this.Info = (mesagge, title) => { 
+        newMesagge(mesagge, title, 'toast-info');
     }
 
-    this.Success = (mesagge) => {
-        newMesagge(mesagge, 'toast-success', newId());
+    this.Success = (mesagge, title) => {
+        newMesagge(mesagge, title, 'toast-success');
     }
 
-    this.Error = (mesagge) => {
-        newMesagge(mesagge, 'toast-error', newId());
+    this.Error = (mesagge, title) => {
+        newMesagge(mesagge, title, 'toast-error');
     }
 
-    this.Warning = (mesagge) => {
-        newMesagge(mesagge, 'toast-warning', newId());
+    this.Warning = (mesagge, title) => {
+        newMesagge(mesagge, title, 'toast-warning');
     }
     
-    function newMesagge(mesagge, type, id) {
+    function newMesagge(mesagge, title, type, id = newId()) {
         
-        if ($('#notifications :last-child').html() != mesagge) {
+        let data = $('#notifications :last-child').html() || '';
 
-            $('#notifications').append(`<div class="toast ${type}" id="${id}">${mesagge}</div>`);
+        if (!data.includes(mesagge)) {
+            
+            title ? title = `<b class="title">${title}</b>`: title = '';
+
+            $('#notifications').append(`<div class="toast ${type}" id="${id}">${title}${mesagge}</div>`);
     
             $(`#${id}`).click(()=>{
                 $(`#${id}`).remove();
