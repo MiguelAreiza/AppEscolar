@@ -234,6 +234,11 @@ $(document).ready(()=>{
         
     });
 
+    $('#btnLista').click(() => {
+        history.pushState(null, "", "../lista/");        
+        goLocation.ChangeView('./');
+    })
+
     $('.facebook').click(()=>{
         redirect.Facebook();
     });
