@@ -56,7 +56,7 @@ $(document).ready(function() {
         let goal = $('#goal').val();
         let color = $('#color').val();
 
-        if (goal === '' || color === '') {
+        if (!goal || !color) {
 
             toastr.Warning('Diligencia los campos requeridos');
             
