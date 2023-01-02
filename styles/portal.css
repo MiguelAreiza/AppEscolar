@@ -5,7 +5,7 @@
 .navBar > .center > #nameUser{
     color: #fff;
     font-family: 'Merienda One', cursive;
-    font-size: x-large;
+    font-size: 1.5rem;
 }
 .navBar > .rigth > #btnSettings{
     background-image: url('../Images/Botones/Setting.png');

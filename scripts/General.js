@@ -53,33 +53,7 @@ function Toastr() {
 
         }
 
-    }
-
-    function newId() {
-
-        let Codigo = '';
-    
-        for (let i = 0; i < 3; i++) {   
-
-            let str1, str2, str3, str4;
-            /*Generar numeros random de acuerdo al codigo ASCII y convertirlos*/
-            str1 = String.fromCharCode(Math.round((Math.random() * (57 - 48)) + 48));
-            str2 = String.fromCharCode(Math.round((Math.random() * (90 - 65)) + 65));
-            str3 = String.fromCharCode(Math.round((Math.random() * (122 - 97)) + 97));
-            str4 = String.fromCharCode(Math.round((Math.random() * (57 - 48)) + 48));    
-    
-            /*Integrarlo al codigo al codigo*/
-            Codigo += `${str1}${str2}${str3}${str4}`;
-
-            if (i != 2) {
-                Codigo += `-`;
-            }
-
-        }
-
-        return Codigo;
-
-    }
+    }   
 
 }
 
@@ -94,6 +68,32 @@ function GoLocation() {
         });
 
     }
+
+}
+
+function newId() {
+
+    let Codigo = '';
+
+    for (let i = 0; i < 3; i++) {   
+
+        let str1, str2, str3, str4;
+        /*Generar numeros random de acuerdo al codigo ASCII y convertirlos*/
+        str1 = String.fromCharCode(Math.round((Math.random() * (57 - 48)) + 48));
+        str2 = String.fromCharCode(Math.round((Math.random() * (90 - 65)) + 65));
+        str3 = String.fromCharCode(Math.round((Math.random() * (122 - 97)) + 97));
+        str4 = String.fromCharCode(Math.round((Math.random() * (57 - 48)) + 48));    
+
+        /*Integrarlo al codigo al codigo*/
+        Codigo += `${str1}${str2}${str3}${str4}`;
+
+        if (i != 2) {
+            Codigo += `-`;
+        }
+
+    }
+
+    return Codigo;
 
 }
 

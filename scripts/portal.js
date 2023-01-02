@@ -235,7 +235,7 @@ $(document).ready(()=>{
     });
 
     $('#btnLista').click(() => {
-        history.pushState(null, "", "../lista/");        
+        history.pushState(null, "", "../portal/lista/");        
         goLocation.ChangeView('./');
     })
 
