@@ -143,7 +143,7 @@
 .tienda > .text{
     display: block;
     background: #000;
-    padding: 2vh 3vh;
+    padding: 2vh 3vh 2vh 10vh;
     color: #fff;
     font-size: 1.5rem;
     font-weight: 700;
