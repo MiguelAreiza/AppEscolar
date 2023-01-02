@@ -71,6 +71,7 @@ $(document).ready(()=>{
 
                 $('.telon').hide();
                 $('.personajes').hide();
+                $('.pageContent').show();
                 toastr.Success('Magnífica elección');
 
             });
@@ -79,6 +80,7 @@ $(document).ready(()=>{
 
         $('.telon').show();
         $('.personajes').show();
+        $('.pageContent').hide();
         
     });
 
@@ -88,10 +90,12 @@ $(document).ready(()=>{
         
         $('.telon').show();
         $('.insignias').show();
+        $('.pageContent').hide();
 
         $('.insignias #btnAtras').click(() => {
             $('.telon').hide();
             $('.insignias').hide();
+            $('.pageContent').show();
         });
 
         $('#insCalidad').click(() => {
@@ -163,10 +167,12 @@ $(document).ready(()=>{
 
         $('.telon').show();
         $('.poderes').show();
+        $('.pageContent').hide();
         
         $('.poderes #btnAtras').click(() => {
             $('.telon').hide();
             $('.poderes').hide();
+            $('.pageContent').show();
         });
 
     });
@@ -226,10 +232,12 @@ $(document).ready(()=>{
 
         $('.telon').show();
         $('.tienda').show();
+        $('.pageContent').hide();
         
         $('.tienda #btnAtras').click(() => {
             $('.telon').hide();
             $('.tienda').hide();
+            $('.pageContent').show();
         });
         
     });
