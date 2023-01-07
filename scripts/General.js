@@ -84,7 +84,7 @@ function newId() {
         str3 = String.fromCharCode(Math.round((Math.random() * (122 - 97)) + 97));
         str4 = String.fromCharCode(Math.round((Math.random() * (57 - 48)) + 48));    
 
-        /*Integrarlo al codigo al codigo*/
+        /*Integrarlo al codigo*/
         Codigo += `${str1}${str2}${str3}${str4}`;
 
         if (i != 2) {

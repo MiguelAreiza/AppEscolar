@@ -27,8 +27,6 @@ $(document).ready(()=>{
 
         const USER = e.target[0].value;
         const PASS = e.target[1].value;
-        e.target[0].value = '';
-        e.target[1].value = '';
 
         fetch('../../data.txt').then(async (response) => {
 
@@ -48,7 +46,7 @@ $(document).ready(()=>{
                 goLocation.ChangeView('./');
 
             } else {
-                toastr.Warning('Usuario no registrado');
+                toastr.Warning('Usuario o contraseña invalida');
             }
             
         }).catch(() => {
