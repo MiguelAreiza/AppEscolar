@@ -1,36 +1,74 @@
 'use strict';
 
-fetch('../../data.txt').then(async (response) => {
+// fetch('../../data.txt').then(async (response) => {
 
-    let users = (await response.json()).users;
+//     let users = (await response.json()).users;
     
-    if (sessionStorage.AppUser) {
+//     if (sessionStorage.AppUser) {
 
-        users = users.filter(user => user.id == JSON.parse(sessionStorage.AppUser)[0].id);
+//         users = users.filter(user => user.id == JSON.parse(sessionStorage.AppUser)[0].id);
 
-        if (users.length === 1) {
+//         if (users.length === 1) {
             
-            $('#nameUser').html(users[0].name);            
+//             $('#nameUser').html(users[0].name);            
+//             toastr.Success(`Permítete brillar como una estrella`);
+
+//         } else {
+
+//             history.pushState(null, "", "../login/");
+//             goLocation.ChangeView('../../views/login/');
+
+//         }
+
+//     } else {
+
+//         history.pushState(null, "", "../login/");
+//         goLocation.ChangeView('../login/');
+
+//     }
+    
+// }).catch((e) => {
+//     history.pushState(null, "", "../login/");
+//     goLocation.ChangeView('../login/');
+// });
+if (sessionStorage.AppUser) {
+
+    var requestOptions = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "procedure": `sp_ValidateUserById '${JSON.parse(sessionStorage.AppUser).Id}';`
+        }),
+        redirect: 'follow'
+    };
+      
+    fetch('http://www.appescolar.somee.com/api/Procedures/ExecProcedure', requestOptions).then(async (response) => {
+    
+        let data = (await response.json())[0];
+        
+        if (!data.rpta) {
+            sessionStorage.setItem('AppUser', JSON.stringify(data));
+            $('#nameUser').html(data.StrName);
             toastr.Success(`Permítete brillar como una estrella`);
-
         } else {
-
             history.pushState(null, "", "../login/");
             goLocation.ChangeView('../../views/login/');
-
         }
-
-    } else {
-
+    
+    }).catch((e) => {
         history.pushState(null, "", "../login/");
         goLocation.ChangeView('../login/');
+        console.log('Error', e);
+    });
 
-    }
-    
-}).catch(() => {
-    toastr.Error('Error en la transaccion');
-    location.reload();
-});
+} else {
+
+    history.pushState(null, "", "../login/");
+    goLocation.ChangeView('../login/');
+
+}
 
 $(document).ready(()=>{
 

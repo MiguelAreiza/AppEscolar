@@ -12,9 +12,9 @@ $(document).ready(()=>{
 
     });
 
-    $('#btnLogin').click(() => {
-        const user = $('#userLogin').val();
-        const pass = $('#passLogin').val();
+    $('#btnLogin').click((e) => {
+        const user = e.target.form[0].value;
+        const pass = e.target.form[1].value;
         
         if (user == '' ||  pass == '') {
             toastr.Warning('Completa los campos primero');
@@ -59,7 +59,7 @@ $(document).ready(()=>{
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                "procedure": `sp_ValidateUser '${USER}', '${PASS}';`
+                "procedure": `sp_ValidateLogin '${USER}', '${PASS}';`
             }),
             redirect: 'follow'
         };
@@ -67,7 +67,7 @@ $(document).ready(()=>{
         fetch('http://www.appescolar.somee.com/api/Procedures/ExecProcedure', requestOptions).then(async (response) => {
         
             let data = (await response.json())[0];
-            debugger;
+            
             if (!data.rpta) {
                 sessionStorage.setItem('AppUser', JSON.stringify(data));
                 history.pushState(null, "", "../portal/");        
