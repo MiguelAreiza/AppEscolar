@@ -15,15 +15,13 @@ fetch('../../data.txt').then(async (response) => {
 
         } else {
 
-            toastr.Warning('Logueate primero para iniciar');
             history.pushState(null, "", "../login/");
             goLocation.ChangeView('../../views/login/');
 
-        }                   
+        }
 
     } else {
 
-        toastr.Warning('Logueate primero para iniciar');
         history.pushState(null, "", "../login/");
         goLocation.ChangeView('../login/');
 
@@ -31,6 +29,7 @@ fetch('../../data.txt').then(async (response) => {
     
 }).catch(() => {
     toastr.Error('Error en la transaccion');
+    location.reload();
 });
 
 $(document).ready(()=>{
@@ -44,11 +43,11 @@ $(document).ready(()=>{
         
         if ($('#menu').css('height') == '0px') {
 
-            $('#menu').css('height', 'calc(100% * 4)');  
+            $('#menu').css('height', 'calc(100% * 4)');
 
         }  else {
              
-            $('#menu').css('height', '0'); 
+            $('#menu').css('height', '0px'); 
 
         }     
         
@@ -242,10 +241,20 @@ $(document).ready(()=>{
         
     });
 
+    $('#btnEquipo').click(() => {
+        history.pushState(null, "", "../portal/equipo/");        
+        goLocation.ChangeView('./');
+    });
+    
     $('#btnLista').click(() => {
         history.pushState(null, "", "../portal/lista/");        
         goLocation.ChangeView('./');
-    })
+    });
+
+    $('#btnMisiones').click(() => {
+        history.pushState(null, "", "../portal/misiones/");        
+        goLocation.ChangeView('./');
+    });
 
     $('.facebook').click(()=>{
         redirect.Facebook();

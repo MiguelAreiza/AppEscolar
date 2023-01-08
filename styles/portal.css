@@ -66,37 +66,48 @@
     justify-content: center;
     align-items: center;
 }
-.pageContent > .listaMetas{
-    width: 60vh;
-    height: 67vh;
+.pageContent > .cardButton{
+    width: 45vh;
+    height: 52vh;
+    margin: 5vh;
     background: linear-gradient(45deg, #56ccef, #ec34e0);
     border-radius: 2vh;
     border: 2px solid #fff;
     box-shadow: 0 3px 10px #000;
     transition: .6s;
 }
-.pageContent > .listaMetas:hover{
-    transform: scale(1.04);
+.pageContent > .cardButton:hover{
+    transform: scale(1.1);
 }
-.pageContent > .listaMetas > label{
+.pageContent > .cardButton > .titulo{
     display: block;
-    width: 100%;
+    padding-top: 1vh;
     height: 7vh;
     text-align: center;
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-family: 'Merienda One', cursive;
 }
-.pageContent > .listaMetas > #btnLista{
-    display: block;
+.pageContent > .cardButton > button{
     width: 100%;
     height: calc(100% - 7vh);
     border-radius: 0 0 2vh 2vh;
     border: none;
     background: #0005;
-    background-image: url('../Images/Fondos/FondoLista.png');
-    background-size: 100% 100%;
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
+#btnLista{
+    background-image: url('../Images/Fondos/FondoLista.png');
+}
+#btnEquipo{
+    background-image: url('../Images/Fondos/FondoEquipo.png');
+}
+#btnMisiones{
+    background-image: url('../Images/Fondos/FondoMision.png');
+}
+
 
 /* Estilos de modales */
 .telon{

@@ -15,7 +15,6 @@ fetch('../../../data.txt').then(async (response) => {
 
         } else {
 
-            toastr.Warning('Logueate primero para iniciar');
             history.pushState(null, "", "../../login/");
             goLocation.ChangeView('../../views/login/');
 
@@ -23,7 +22,6 @@ fetch('../../../data.txt').then(async (response) => {
 
     } else {
 
-        toastr.Warning('Logueate primero para iniciar');
         history.pushState(null, "", "../../login/");
         goLocation.ChangeView('../login/');
 
@@ -31,6 +29,7 @@ fetch('../../../data.txt').then(async (response) => {
     
 }).catch(() => {
     toastr.Error('Error en la transaccion');
+    location.reload();
 });
 
 $(document).ready(function() {
