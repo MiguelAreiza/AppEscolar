@@ -40,6 +40,7 @@
     font-weight: 700;
     text-align: center;
     margin-top: 1vh;
+    font-family: 'Merienda One', cursive;
 }
 .cardGoal > .input{
     height: 5vh;
@@ -58,7 +59,8 @@
     border-radius: 3vh;    
     border: 2px solid #56ccef;
     box-shadow: 0 3px 5px #ec34e0;
-    border-top: none;
+    border-top: none;    
+    font-family: 'Merienda One', cursive;
 }
 .cardGoal > .input > #goal::placeholder{
     color: #fff;
@@ -85,6 +87,7 @@
     box-shadow: 0 3px 5px #ec34e0;
     border-top: none;
     transition: .6s;
+    font-family: 'Merienda One', cursive;
 }
 .cardGoal > .input  > button:hover{
     transform: scale(1.1);
@@ -102,6 +105,8 @@
     border-radius: 2vh 2vh 0 0;
     padding: 1vh;
     font-size: 1.1rem;
+    font-family: 'Merienda One', cursive;
+    text-shadow: 1px 1px 1px #000;
 }
 .cardGoal > .goalList > #goalList{
     width: 100%;
@@ -133,6 +138,7 @@
     width: calc(100% - 24px - 2vh);
     text-align: justify;
     margin-right: 2vh;
+    font-family: 'Merienda One', cursive;
 }
 .cardGoal > .goalList > #goalList > .goal > button{
     width: 24px;

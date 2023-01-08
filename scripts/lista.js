@@ -2,7 +2,7 @@
 
 if (sessionStorage.AppUser) {
 
-    var requestOptions = {
+    let requestOptions = {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -54,14 +54,32 @@ $(document).ready(function() {
 
     let goalList = [];
 
-    if (localStorage.goalList) {
 
-        goalList = JSON.parse(localStorage.goalList);
-        
-    }
+    let requestOptions = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "procedure": `sp_GoalByUser '${JSON.parse(sessionStorage.AppUser).Id}';`
+        }),
+        redirect: 'follow'
+    };
+    
+    fetch('https://www.appescolar.somee.com/api/Procedures/ExecProcedure', requestOptions).then(async (response) => {
 
-    UpdateGoalList();
+        let data = (await response.json());
 
+        if (!data[0].rpta) {
+
+            goalList = data;
+            UpdateGoalList();
+
+        } else {
+            toastr.Error('Error en la transacción');
+        }            
+    
+    }).catch( error => console.log('Error', error));
 
     $('#btnCreate').click(()=>{
 
@@ -77,11 +95,32 @@ $(document).ready(function() {
             $('#goal').val('');
             $('#color').val('#cccccc');
 
-            goalList.push({'id':newId(),'goal':goal,'color':color,'complete':'false'});
-
-            UpdateGoalList();
-
-            toastr.Success('Meta creada correctamente');
+            let requestOptions = {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "procedure": `sp_CreateGoal '${JSON.parse(sessionStorage.AppUser).Id}', '${goal}', '${color}';`
+                }),
+                redirect: 'follow'
+            };
+            
+            fetch('https://www.appescolar.somee.com/api/Procedures/ExecProcedure', requestOptions).then(async (response) => {
+    
+                let data = (await response.json());
+    
+                if (!data[0].rpta) {
+    
+                    goalList = data;
+                    toastr.Success('Meta creada correctamente');
+                    UpdateGoalList();
+    
+                } else {
+                    toastr.Warning('Ya existe esta meta');
+                }            
+            
+            }).catch( error => console.log('Error', error));            
 
         }
     
@@ -94,8 +133,8 @@ $(document).ready(function() {
 
         for (let i = 0; i < goalList.length; i++) {
 
-            html += `<div class="goal" id="${goalList[i].id}" style="background:${goalList[i].color};">
-                        <label ${goalList[i].complete == 'true'? 'class="complete"':''}>${goalList[i].goal}</label>                            
+            html += `<div class="goal" id="${goalList[i].Id}" style="background:${goalList[i].StrColor};">
+                        <label ${goalList[i].BlStatus ? 'class="complete"':''}>${goalList[i].StrGoal}</label>
                         <button></button>
                     </div>`;
 
@@ -105,35 +144,78 @@ $(document).ready(function() {
 
         for (let i = 0; i < goalList.length; i++) {
 
-            $(`#${goalList[i].id}`).dblclick(()=>{
+            $(`#${goalList[i].Id}`).dblclick(()=>{
 
-                if (goalList[i].complete == 'true') {
+                if (!goalList[i].BlStatus) {
 
-                    goalList[i].complete = 'false';
-                    toastr.Info('Meta pendiente');
-
-                } else {
-
-                    goalList[i].complete = 'true';
-                    toastr.Info('Meta completada');  
+                    let requestOptions = {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            "procedure": `sp_ChangeStatus '${goalList[i].Id}', '${JSON.parse(sessionStorage.AppUser).Id}';`
+                        }),
+                        redirect: 'follow'
+                    };
+                    
+                    fetch('https://www.appescolar.somee.com/api/Procedures/ExecProcedure', requestOptions).then(async (response) => {
+            
+                        let data = (await response.json());
+            
+                        if (!data[0].rpta) {
+            
+                            goalList = data;                            
+                            toastr.Info('Meta completada');
+                            UpdateGoalList();
+            
+                        } else {
+                            toastr.Error('Error en la transacción');
+                        }            
+                    
+                    }).catch( error => console.log('Error', error));
 
                 }
 
-                UpdateGoalList();
 
             });
 
-            $(`#${goalList[i].id} > button`).click(()=>{
-
-                goalList = goalList.filter(goal => goal.id != goalList[i].id);
+            $(`#${goalList[i].Id} > button`).click(()=>{
                 
-                UpdateGoalList();
+                let requestOptions = {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "procedure": `sp_DeleteGoal '${goalList[i].Id}', '${JSON.parse(sessionStorage.AppUser).Id}';`
+                    }),
+                    redirect: 'follow'
+                };
 
+                fetch('https://www.appescolar.somee.com/api/Procedures/ExecProcedure', requestOptions).then(async (response) => {
+
+                    let data = (await response.json());
+
+                    if (data.length == 0) {
+
+                        $('#goalList').html('');
+
+                    } else if (!data[0].rpta) {
+
+                        goalList = data;                            
+                        toastr.Info('Meta eliminada');
+                        UpdateGoalList();
+
+                    } else {
+                        toastr.Error('Error en la transacción');
+                    }
+
+                }).catch( error => console.log('Error', error));
+                
             });
 
         }
-
-        localStorage.setItem('goalList', JSON.stringify(goalList))
 
     }
     

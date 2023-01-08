@@ -93,6 +93,12 @@ $(document).ready(()=>{
         $('.telon').show();
         $('.personajes').show();
         $('.pageContent > *').hide();
+
+        $('.personajes #btnAtras').click(() => {
+            $('.telon').hide();
+            $('.personajes').hide();
+            $('.pageContent > *').show();
+        });
         
     });
 
