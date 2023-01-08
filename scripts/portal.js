@@ -16,7 +16,7 @@ if (sessionStorage.AppUser) {
     fetch('https://www.appescolar.somee.com/api/Procedures/ExecProcedure', requestOptions).then(async (response) => {
     
         let data = (await response.json())[0];
-        
+
         if (!data.rpta) {
             
             sessionStorage.setItem('AppUser', JSON.stringify(data));
