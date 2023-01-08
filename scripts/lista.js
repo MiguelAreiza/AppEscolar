@@ -1,16 +1,26 @@
 'use strict';
 
-fetch('../../../data.txt').then(async (response) => {
+if (sessionStorage.AppUser) {
 
-    let users = (await response.json()).users;
+    var requestOptions = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "procedure": `sp_ValidateUserById '${JSON.parse(sessionStorage.AppUser).Id}';`
+        }),
+        redirect: 'follow'
+    };
     
-    if (sessionStorage.AppUser) {
-
-        users = users.filter(user => user.id == JSON.parse(sessionStorage.AppUser)[0].id);
-
-        if (users.length === 1) {
+    fetch('https://www.appescolar.somee.com/api/Procedures/ExecProcedure', requestOptions).then(async (response) => {
+    
+        let data = (await response.json())[0];
+        
+        if (!data.rpta) {
             
-            $('#nameUser').html(users[0].name);            
+            sessionStorage.setItem('AppUser', JSON.stringify(data));
+            $('#nameUser').html(data.StrName);            
             toastr.Success(`Compartenos todas tus metas`);
 
         } else {
@@ -18,19 +28,22 @@ fetch('../../../data.txt').then(async (response) => {
             history.pushState(null, "", "../../login/");
             goLocation.ChangeView('../../views/login/');
 
-        }                   
-
-    } else {
+        }
+    
+    }).catch((e) => {
 
         history.pushState(null, "", "../../login/");
         goLocation.ChangeView('../login/');
+        console.log('Error', e);
 
-    }
-    
-}).catch(() => {
-    toastr.Error('Error en la transaccion');
-    location.reload();
-});
+    });
+
+} else {
+
+    history.pushState(null, "", "../../login/");
+    goLocation.ChangeView('../login/');
+
+}
 
 $(document).ready(function() {
 
