@@ -1,21 +1,33 @@
-use Miguel2022
+use Miguel2022;
 go
 
 ----------------------------------------
 ---------------- Tablas ----------------
 ----------------------------------------
-create table tblUser(
-	Id UNIQUEIDENTIFIER primary key,
-	RoleFk UNIQUEIDENTIFIER FOREIGN KEY REFERENCES tblRole(Id) not null,
-	StrUser varchar(100) not null,
-	StrPass VarBinary(256) not null,
-	StrName varchar(100) not null
-);
-go
-
 create table tblRole(
 	Id UNIQUEIDENTIFIER primary key,
 	StrName varchar(50) not null
+);
+go
+-- insert into tblRole values ('7EC0690B-F5FA-4B11-84D0-4B8BE28E29B0', 'Alumno');
+-- insert into tblRole values ((select NEWID()), 'Maestro');
+
+create table tblTeam(
+	Id UNIQUEIDENTIFIER primary key,
+	StrName varchar(100) not null,
+	StrMeaning varchar(100) not null,
+	StrGoals varchar(200) not null
+);
+go
+
+create table tblUser(
+	Id UNIQUEIDENTIFIER primary key,
+	RoleFk UNIQUEIDENTIFIER FOREIGN KEY REFERENCES tblRole(Id) not null,
+	TeamFk UNIQUEIDENTIFIER FOREIGN KEY REFERENCES tblTeam(Id),
+	StrJob varchar(100),
+	StrUser varchar(100) not null,
+	StrPass VarBinary(256) not null,
+	StrName varchar(100) not null
 );
 go
 
@@ -23,7 +35,7 @@ create table tblGoal(
 	Id UNIQUEIDENTIFIER primary key,
 	UserFk UNIQUEIDENTIFIER FOREIGN KEY REFERENCES tblUser(Id) not null,
 	StrGoal varchar(100) not null,
-	StrColor varchar(8) not null,
+	StrColor varchar(20) not null,
 	BlStatus bit default 0 not null
 );
 go
@@ -31,7 +43,7 @@ go
 ----------------------------------------
 ------ Procedimientos almacenados ------
 ----------------------------------------
-create procedure sp_CreateUser
+alter procedure sp_CreateUser
 	@RoleFk UNIQUEIDENTIFIER,
 	@StrUser varchar(100),
 	@StrPass varchar(max),
@@ -48,7 +60,7 @@ begin
 	else 
 		begin transaction tx
 			begin
-				insert into tblUser values(@Id, @RoleFk, @StrUser, ENCRYPTBYPASSPHRASE('N4T4L14', @StrPass), @StrName);
+				insert into tblUser (Id, RoleFk, StrUser, StrPass, StrName) values(@Id, @RoleFk, @StrUser, ENCRYPTBYPASSPHRASE('N4T4L14', @StrPass), @StrName);
 			end
 			if(@@ERROR > 0)
 				begin rollback transaction tx
@@ -62,17 +74,15 @@ begin
 				
 end
 go 
--- exec sp_CreateUser '7EC0690B-F5FA-4B11-84D0-4B8BE28E29B0', 'alumno@appescolar.com', 'qwert.12345', 'Primer alumno';
+-- exec sp_CreateUser 'E922AB89-6AA3-4835-BA6A-CE189F0EB74A', 'admin@appescolar.com', 'qwert.12345', 'Miguel Areiza';
 
-create procedure sp_UpdateUser
+create procedure sp_AddTeamUser
 	@Id UNIQUEIDENTIFIER,
-	@RoleFk UNIQUEIDENTIFIER,
-	@StrUser varchar(100),
-	@StrPass varchar(max),
-	@StrName varchar(100)
+	@TeamFk UNIQUEIDENTIFIER,
+	@StrJob varchar(100)
 as
 begin 
-	if not exists(select Id from tblUser where id = @Id)
+	if ((select COUNT(Id) from tblUser where TeamFk = @TeamFk) = 4)
 		begin 
 			select -1 as rpta
 			return
@@ -80,23 +90,22 @@ begin
 	else 
 		begin transaction tx
 			begin
-				update tblUser set RoleFk = @RoleFk, StrUser = @StrUser, StrPass = ENCRYPTBYPASSPHRASE('N4T4L14', @StrPass), StrName = @StrName where Id = @Id;
+				update tblUser set TeamFk = @TeamFk, StrJob = @StrJob where Id = @Id;
 			end
 			if(@@ERROR > 0)
 				begin
 					rollback transaction tx
-					select -2 as rpta
+					select -1 as rpta
 					return 
 				end
 			else 
 				begin 
 					commit transaction tx 
 					select @Id as rpta
-				end
-				
+				end				
 end
 go
--- exec sp_UpdateUser 'CFB4EFA8-0B02-4B54-A629-3187F3312BB7', '24C47C1F-4979-4813-8397-3D3B6E59A12F', 'Miguel', 'Miguel', 'Miguel'
+-- exec sp_AddTeamUser 'id', 'teamfk', 'Realator';
 
 create procedure sp_ValidateLogin
 	@User varchar(100),
@@ -105,7 +114,7 @@ as
 begin
 	if exists (select Id from tblUser where StrUser = @User and CONVERT(varchar(max), DECRYPTBYPASSPHRASE('N4T4L14', StrPass)) = @Pass)
 		begin
-			select Id, RoleFk, StrName, StrUser from tblUser 
+			select Id, RoleFk, TeamFk, StrJob, StrUser from tblUser 
 			where Id =(select Id from tblUser where StrUser = @User and CONVERT(varchar(max), DECRYPTBYPASSPHRASE('N4T4L14', StrPass)) = @Pass)
 			return
 		end
@@ -124,7 +133,7 @@ as
 begin
 	if exists (select Id from tblUser where Id = @Id)
 		begin
-			select Id, RoleFk, StrName, StrUser from tblUser where Id = @Id;
+			select Id, RoleFk, TeamFk, StrJob, StrUser from tblUser where Id = @Id;
 			return
 		end
 	else
@@ -136,10 +145,11 @@ end
 go
 -- exec sp_ValidateUserById 'E4B3AE7C-39B2-4162-B2A5-876FA9B1973D';
 
+
 create procedure sp_CreateGoal
 	@UserFk UNIQUEIDENTIFIER,
 	@StrGoal varchar(100),
-	@StrColor varchar(8)
+	@StrColor varchar(20)
 as
 begin
 	declare @Id uniqueidentifier;
@@ -161,7 +171,7 @@ begin
 				end
 			else 
 				begin commit transaction tx 
-					select @Id as Id
+					select * from tblGoal where UserFk = @UserFk;
 				end
 				
 end

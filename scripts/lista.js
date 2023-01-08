@@ -70,7 +70,11 @@ $(document).ready(function() {
 
         let data = (await response.json());
 
-        if (!data[0].rpta) {
+        if (data.length == 0) {
+            
+            toastr.Info(`Aún no has creado metas`);
+
+        } else if (!data[0].rpta) {
 
             goalList = data;
             UpdateGoalList();

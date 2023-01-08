@@ -25,11 +25,21 @@
         </div>
         <div class="pageContent">
             <div class="cardLogin">
-                <label class="text">Ingresar</label>
                 <form id="formLogin">
+                    <label class="text">Ingresar</label>
                     <input id="userLogin" type="text" placeholder="Usuario" autocomplete="email" required>
-                    <input id="passLogin" type="password" placeholder="Contraseña" required>
-                    <button type="submit" id="btnLogin">Login</button>
+                    <input id="passLogin" type="password" placeholder="Contraseña" autocomplete="off" required>
+                    <button type="submit" class="btnForm" id="btnLogin">Login</button>
+                    <button type="button" class="btnReturn"></button>
+                </form>
+                <form id="formCreate">                    
+                    <label class="text">Registrarse</label>              
+                    <input id="nameCreate" type="text" placeholder="Nombre" autocomplete="off" required>
+                    <input id="userCreate" type="text" placeholder="Usuario" autocomplete="off" required>
+                    <input id="passCreate" type="password" placeholder="Contraseña" autocomplete="off" required>                    
+                    <input id="confirmCreate" type="password" placeholder="Confirmar" autocomplete="off" required>
+                    <button type="submit" class="btnForm" id="btnCreate">Login</button>                    
+                    <button type="button" class="btnReturn"></button>
                 </form>
             </div>
         </div>

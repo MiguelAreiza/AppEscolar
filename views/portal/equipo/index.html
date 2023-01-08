@@ -26,8 +26,11 @@
         <div class="pageContent">
             <div class="formEquipo">
                 <form id="formStep1">
-                    <input type="text" placeholder="Nombre del equipo">
-                    <button type="submit">Enviar</button>
+                    <label class="titulo">Información de tu equipo</label>
+                    <input id="teamName" type="text" placeholder="Nombre del equipo" autocomplete="off" required>
+                    <input id="teamMeaning" type="text" placeholder="Significado del nombre" autocomplete="off" required>
+                    <textarea id="teamGoals" placeholder="Metas del equipo"></textarea>
+                    <button id="btnSendStep1" type="submit">Enviar</button>
                 </form>
                 <form id="formStep2">
                     
