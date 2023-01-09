@@ -25,6 +25,7 @@ create table tblUser(
 	RoleFk UNIQUEIDENTIFIER FOREIGN KEY REFERENCES tblRole(Id) not null,
 	TeamFk UNIQUEIDENTIFIER FOREIGN KEY REFERENCES tblTeam(Id),
 	StrJob varchar(100),
+	StrImage varchar(50),
 	StrUser varchar(100) not null,
 	StrPass VarBinary(256) not null,
 	StrName varchar(100) not null
@@ -43,7 +44,7 @@ go
 ----------------------------------------
 ------ Procedimientos almacenados ------
 ----------------------------------------
-alter procedure sp_CreateUser
+create procedure sp_CreateUser
 	@RoleFk UNIQUEIDENTIFIER,
 	@StrUser varchar(100),
 	@StrPass varchar(max),
@@ -107,14 +108,14 @@ end
 go
 -- exec sp_AddTeamUser 'id', 'teamfk', 'Realator';
 
-create procedure sp_ValidateLogin
+alter procedure sp_ValidateLogin
 	@User varchar(100),
 	@Pass varchar(max)
 as
 begin
 	if exists (select Id from tblUser where StrUser = @User and CONVERT(varchar(max), DECRYPTBYPASSPHRASE('N4T4L14', StrPass)) = @Pass)
 		begin
-			select Id, RoleFk, TeamFk, StrJob, StrUser from tblUser 
+			select Id, RoleFk, TeamFk, StrJob, StrImage, StrUser, StrName from tblUser 
 			where Id =(select Id from tblUser where StrUser = @User and CONVERT(varchar(max), DECRYPTBYPASSPHRASE('N4T4L14', StrPass)) = @Pass)
 			return
 		end
@@ -127,13 +128,13 @@ end
 go
 -- exec sp_ValidateLogin 'admin@appescolar.com', 'qwert.12345';
 
-create procedure sp_ValidateUserById
+alter procedure sp_ValidateUserById
 	@Id UNIQUEIDENTIFIER
 as
 begin
 	if exists (select Id from tblUser where Id = @Id)
 		begin
-			select Id, RoleFk, TeamFk, StrJob, StrUser from tblUser where Id = @Id;
+			select Id, RoleFk, TeamFk, StrJob, StrImage, StrUser, StrName from tblUser where Id = @Id;
 			return
 		end
 	else
@@ -245,3 +246,40 @@ begin
 end
 go 
 -- exec sp_ChangeStatus '3D77DBE3-6D5E-42F5-A98D-2152F12ED9B6', 'E4B3AE7C-39B2-4162-B2A5-876FA9B1973D';
+
+create procedure sp_TeamByUser
+	@IdUser UNIQUEIDENTIFIER
+as
+begin
+	if not exists(select Id from tblTeam where Id = (select TeamFk from tblUser where Id = @IdUser))
+		begin 
+			select -1 as rpta -- no tiene equipo 
+			return
+		end
+	if ((select Count(Id) from tblCompany where UserFk = @Id) > 0)
+		begin 
+			select -3 as rpta 
+			return
+		end
+	else 
+		begin transaction tx
+			begin
+				Delete from tblUser where Id = @Id;
+			end
+			begin
+				Delete from tblUser_Rol where Id = @codUser_Role;
+			end
+			if(@@ERROR > 0)
+				begin
+					rollback transaction tx
+					select -2 as rpta
+					return 
+				end
+			else 
+				begin 
+					commit transaction tx 
+					select 1 as  rpta
+				end
+				
+end
+go

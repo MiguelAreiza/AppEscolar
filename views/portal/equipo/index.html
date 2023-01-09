@@ -28,11 +28,11 @@
                     <label class="title">Información de tu equipo</label>
                     <input class="formInput" id="teamName" type="text" placeholder="Nombre del equipo" autocomplete="off" required>
                     <input class="formInput" id="teamMeaning" type="text" placeholder="Significado del nombre" autocomplete="off" required>
-                    <textarea class="formInput" id="teamGoals" placeholder="Metas del equipo"></textarea>
-                    <button class="formInput" id="btnCreate" type="submit">Enviar</button>
+                    <textarea class="formInput" id="teamGoals" placeholder="Metas del equipo" required></textarea>
+                    <button class="formInput" id="btnCreate" type="submit">Crear Grupo</button>
                 </form>
                 <form id="formFriends">
-                    <label class="title" id="nameTeam">los mosqueteros</label>
+                    <label class="title" id="nameTeam"></label>
                     <iframe class="videoTeam"
                             src="https://www.youtube.com/embed/1v6JZqNSF0o?controls=0&autoplay=0" 
                             title="YouTube video player" 
@@ -42,26 +42,13 @@
                     </iframe>
                     <div class="usersTeam">
                         <label class="title">Integrantes</label>
-                        <select class="formInput" id="cboFiend1">
-                            <option value="" selected>Compañero 1</option>
-                            <option value="">Camilo</option>
-                            <option value="">Salome</option>
-                            <option value="">Simeon</option>
-                            <option value="">Camila</option>
+                        <select class="formInput" id="cboFriend1" required>
                         </select>
-                        <select class="formInput" id="cboFiend2">
-                            <option value="" selected>Compañero 2</option>
-                            <option value="">Camilo</option>
-                            <option value="">Salome</option>
-                            <option value="">Simeon</option>
-                            <option value="">Camila</option>
+                        <select class="formInput" id="cboFriend2" required>
                         </select>
-                        <select class="formInput" id="cboFiend3">
-                            <option value="" selected>Compañero 3</option>
-                            <option value="">Camilo</option>
-                            <option value="">Salome</option>
-                            <option value="">Simeon</option>
-                            <option value="">Camila</option>
+                        <select class="formInput" id="cboFriend3" required>
+                        </select>
+                        <select class="formInput" id="cboFriend4" required>
                         </select>
                     </div>
                     <div class="readings">
@@ -72,21 +59,13 @@
                     </div>
                     <div class="rolesTeam">                        
                         <label class="title">Roles</label>
-                        <select class="formInput" id="cboCoordinador">
-                            <option value="" selected>Coordinador/a</option>
-                            <option value="">Camilo</option>
+                        <select class="formInput" id="cboCoordinador" required>
                         </select>
-                        <select class="formInput" id="cboPortavoz">
-                            <option value="" selected>Portavoz</option>
-                            <option value="">Salome</option>
+                        <select class="formInput" id="cboPortavoz" required>
                         </select>
-                        <select class="formInput" id="cboSecretario">
-                            <option value="" selected>Secretario/a</option>
-                            <option value="">Simeon</option>
+                        <select class="formInput" id="cboSecretario" required>
                         </select>
-                        <select class="formInput" id="cboSupervisor">
-                            <option value="" selected>Supervisor/a</option>
-                            <option value="">Camila</option>
+                        <select class="formInput" id="cboSupervisor" required>
                         </select>
                     </div>
                     <button class="formInput" id="btnConfirm">Confirmar</button>

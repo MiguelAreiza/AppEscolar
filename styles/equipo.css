@@ -16,16 +16,19 @@
 }
 .cardTeam{
     width: 80vw;
-    min-height: 80vh;
+    height: 100%;
     background: linear-gradient(45deg, #56ccef, #ec34e0);
     border-radius: 2vh;
     border: 2px solid #fff;
     box-shadow: 0 3px 10px #000;
     padding: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .cardTeam > form{
     width: 100%;
-    min-height: 72vh;
+    height: 100%;
     border-bottom: 3px solid #fff;
     border-radius: 1vh;
     contain: content;
@@ -33,6 +36,7 @@
 }
 #formTeam{
     display: none;
+    height: 0;
 }
 form .title{
     display: block;
@@ -45,7 +49,7 @@ form .title{
     text-shadow: 1px 1px 1px #000;
     margin-bottom: 5vh;
 }
-iframe{
+.videoTeam{
     display: block;
     width: 60vw;
     height: 30vw;

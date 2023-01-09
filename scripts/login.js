@@ -93,7 +93,7 @@ $(document).ready(()=>{
             }
 
         }).catch((e) => {
-            toastr.Error('Error en la transaccion');
+            toastr.Error('Contacta tu administrador', 'Error');
             console.log('Error', e);
         });
 
@@ -173,7 +173,7 @@ $(document).ready(()=>{
             }
 
         }).catch((e) => {
-            toastr.Error('Error en la transaccion');
+            toastr.Error('Contacta tu administrador', 'Error');
             console.log('Error', e);
         });
 
