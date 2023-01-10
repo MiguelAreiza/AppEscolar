@@ -63,7 +63,7 @@ $(document).ready(function() {
         let data = (await response.json());
         
         if (!data[0].rpta) {
-
+            
             let html = ``;
 
             for (let i = 0; i < data.length; i++) {
@@ -81,7 +81,7 @@ $(document).ready(function() {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    "procedure": `sp_CboUsersTeam;`
+                    "procedure": `sp_CboUsersTeam '${JSON.parse(sessionStorage.AppUser).Id}';`
                 }),
                 redirect: 'follow'
             };
@@ -94,7 +94,7 @@ $(document).ready(function() {
                     let html = ``;
 
                     for (let i = 0; i < users.length; i++) {
-                        html += `<option value="${data[i].Id}">${data[i].StrName}</option>`;
+                        html += `<option value="${users[i].Id}">${users[i].StrName}</option>`;
                     }
 
                     $('#cboFriend1').html(`<option value="" selected>Integrante 1</option>${html}`);
@@ -235,6 +235,19 @@ $(document).ready(function() {
 
         if (val1 == val2 || val1 == val3 || val1 == val4) {
             e.target.value = '';
+            toastr.Warning('Ya asignaste este integrante');
+        } else {
+            let name = ``;
+            for (let i = 0; i < e.target.length; i++) {
+                if (e.target[i].selected) {
+                    name = e.target[i].innerHTML;
+                }
+            }
+            e.target.disabled = true
+            $('#cboCoordinador').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
+            $('#cboPortavoz').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
+            $('#cboSecretario').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
+            $('#cboSupervisor').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
         }
     });
 
@@ -246,6 +259,19 @@ $(document).ready(function() {
 
         if (val2 == val1 || val2 == val3 || val2 == val4) {
             e.target.value = '';
+            toastr.Warning('Ya asignaste este integrante');
+        } else {
+            let name = ``;
+            for (let i = 0; i < e.target.length; i++) {
+                if (e.target[i].selected) {
+                    name = e.target[i].innerHTML;
+                }
+            }
+            e.target.disabled = true
+            $('#cboCoordinador').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
+            $('#cboPortavoz').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
+            $('#cboSecretario').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
+            $('#cboSupervisor').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
         }
     });
 
@@ -255,19 +281,45 @@ $(document).ready(function() {
         let val3 = e.target.value;
         let val4 = $('#cboFriend4').val();
 
-        if (val3 == val1 || val3 == val2 || val2 == val4) {
+        if (val3 == val1 || val3 == val2 || val3 == val4) {
             e.target.value = '';
+            toastr.Warning('Ya asignaste este integrante');
+        } else {
+            let name = ``;
+            for (let i = 0; i < e.target.length; i++) {
+                if (e.target[i].selected) {
+                    name = e.target[i].innerHTML;
+                }
+            }
+            e.target.disabled = true
+            $('#cboCoordinador').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
+            $('#cboPortavoz').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
+            $('#cboSecretario').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
+            $('#cboSupervisor').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
         }
     });
 
     $('#cboFriend4').change((e) => {
         let val1 = $('#cboFriend1').val();
         let val2 = $('#cboFriend2').val();
-        let val3 = $('#cboFriend4').val();
+        let val3 = $('#cboFriend3').val();
         let val4 = e.target.value;
 
         if (val4 == val1 || val4 == val2 || val4 == val3) {
             e.target.value = '';
+            toastr.Warning('Ya asignaste este integrante');
+        } else {
+            let name = ``;
+            for (let i = 0; i < e.target.length; i++) {
+                if (e.target[i].selected) {
+                    name = e.target[i].innerHTML;
+                }
+            }
+            e.target.disabled = true
+            $('#cboCoordinador').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
+            $('#cboPortavoz').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
+            $('#cboSecretario').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
+            $('#cboSupervisor').append(`<option value="${e.target.value}" selected>${name}</option>`).val('');
         }
     });
 
@@ -279,6 +331,7 @@ $(document).ready(function() {
 
         if (val1 == val2 || val1 == val3 || val1 == val4) {
             e.target.value = '';
+            toastr.Warning('Ya asignaste este integrante');
         }
     });
 
@@ -290,6 +343,7 @@ $(document).ready(function() {
 
         if (val2 == val1 || val2 == val3 || val2 == val4) {
             e.target.value = '';
+            toastr.Warning('Ya asignaste este integrante');
         }
     });
 
@@ -301,6 +355,7 @@ $(document).ready(function() {
 
         if (val3 == val1 || val3 == val2 || val3 == val4) {
             e.target.value = '';
+            toastr.Warning('Ya asignaste este integrante');
         }
     });
 
@@ -312,6 +367,7 @@ $(document).ready(function() {
 
         if (val4 == val1 || val4 == val2 || val4 == val3) {
             e.target.value = '';
+            toastr.Warning('Ya asignaste este integrante');
         }
     });
 

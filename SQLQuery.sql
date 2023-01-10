@@ -75,40 +75,8 @@ begin
 				
 end
 go 
--- exec sp_CreateUser 'E922AB89-6AA3-4835-BA6A-CE189F0EB74A', 'admin@appescolar.com', 'qwert.12345', 'Miguel Areiza';
 
-create procedure sp_AddTeamUser
-	@Id UNIQUEIDENTIFIER,
-	@TeamFk UNIQUEIDENTIFIER,
-	@StrJob varchar(100)
-as
-begin 
-	if ((select COUNT(Id) from tblUser where TeamFk = @TeamFk) = 4)
-		begin 
-			select -1 as rpta
-			return
-		end
-	else 
-		begin transaction tx
-			begin
-				update tblUser set TeamFk = @TeamFk, StrJob = @StrJob where Id = @Id;
-			end
-			if(@@ERROR > 0)
-				begin
-					rollback transaction tx
-					select -1 as rpta
-					return 
-				end
-			else 
-				begin 
-					commit transaction tx 
-					select @Id as rpta
-				end				
-end
-go
--- exec sp_AddTeamUser 'id', 'teamfk', 'Realator';
-
-alter procedure sp_ValidateLogin
+create procedure sp_ValidateLogin
 	@User varchar(100),
 	@Pass varchar(max)
 as
@@ -126,9 +94,8 @@ begin
 		end
 end
 go
--- exec sp_ValidateLogin 'admin@appescolar.com', 'qwert.12345';
 
-alter procedure sp_ValidateUserById
+create procedure sp_ValidateUserById
 	@Id UNIQUEIDENTIFIER
 as
 begin
@@ -144,8 +111,9 @@ begin
 		end
 end
 go
--- exec sp_ValidateUserById 'E4B3AE7C-39B2-4162-B2A5-876FA9B1973D';
 
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
 
 create procedure sp_CreateGoal
 	@UserFk UNIQUEIDENTIFIER,
@@ -177,7 +145,6 @@ begin
 				
 end
 go 
--- exec sp_CreateGoal 'E4B3AE7C-39B2-4162-B2A5-876FA9B1973D', 'Prueba1', '555';
 
 create procedure sp_GoalByUser
 	@UserFk UNIQUEIDENTIFIER
@@ -195,7 +162,6 @@ begin
 		end				
 end
 go 
--- exec sp_GoalByUser 'E4B3AE7C-39B2-4162-B2A5-876FA9B1973D';
 
 create procedure sp_DeleteGoal
 	@Id UNIQUEIDENTIFIER,
@@ -217,7 +183,6 @@ begin
 			end				
 end
 go 
--- exec sp_DeleteGoal 'B409C8B5-DD5B-4C9C-8AEE-347A38DF42C0', 'E4B3AE7C-39B2-4162-B2A5-876FA9B1973D';
 
 create procedure sp_ChangeStatus
 	@Id UNIQUEIDENTIFIER,
@@ -245,7 +210,43 @@ begin
 				end				
 end
 go 
--- exec sp_ChangeStatus '3D77DBE3-6D5E-42F5-A98D-2152F12ED9B6', 'E4B3AE7C-39B2-4162-B2A5-876FA9B1973D';
+
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+create procedure sp_CreateTeam
+	@IdUser UNIQUEIDENTIFIER,
+	@StrName varchar(100),
+	@StrMeaning varchar(100),
+	@StrGoals varchar(200)
+as
+begin
+	declare @Id uniqueidentifier;
+	set @Id = (select NEWID());
+	if exists(select Id from tblTeam where StrName = @StrName)
+		begin
+			select -1 as rpta -- ya existe ese grupo
+			return
+		end
+	else 
+		begin transaction tx
+			begin
+				insert into tblTeam values(@Id, @StrName, @StrMeaning, @StrGoals);				
+			end
+			begin
+				update tblUser set TeamFk = @Id where Id = @IdUser;
+			end
+			if(@@ERROR > 0)
+				begin rollback transaction tx
+					select 0 as rpta -- error en la transaccion
+					return
+				end
+			else 
+				begin commit transaction tx 
+					select @Id as IdTeam;
+				end				
+end
+go 
 
 create procedure sp_TeamByUser
 	@IdUser UNIQUEIDENTIFIER
@@ -256,30 +257,55 @@ begin
 			select -1 as rpta -- no tiene equipo 
 			return
 		end
-	if ((select Count(Id) from tblCompany where UserFk = @Id) > 0)
+	else
+		begin
+			select Us.Id, Us.StrJob, Us.StrName, Te.Id as TeamId, Te.StrName as TeamName from 
+			tblUser as Us inner join 
+			tblTeam as Te on Te.Id = Us.TeamFk
+			where TeamFk = (select TeamFk from tblUser where Id = @IdUser);
+		end				
+end
+go
+
+create procedure sp_AddTeamUser
+	@Id UNIQUEIDENTIFIER,
+	@UserAppId UNIQUEIDENTIFIER,
+	@StrJob varchar(100)
+as
+begin 
+	begin transaction tx
+		begin
+			update tblUser set TeamFk = (select TeamFk from tblUser where Id = @UserAppId), StrJob = @StrJob where Id = @Id;
+		end
+		if(@@ERROR > 0)
+			begin
+				rollback transaction tx
+				select -1 as rpta
+				return 
+			end
+		else 
+			begin 
+				commit transaction tx 
+				select @Id as rpta
+			end				
+end
+go
+
+create procedure sp_CboUsersTeam
+	@Id UNIQUEIDENTIFIER
+as
+begin 
+	if not exists(select Id from tblUser where TeamFk is not null)
 		begin 
-			select -3 as rpta 
+			select -1 as rpta;
 			return
 		end
 	else 
-		begin transaction tx
-			begin
-				Delete from tblUser where Id = @Id;
-			end
-			begin
-				Delete from tblUser_Rol where Id = @codUser_Role;
-			end
-			if(@@ERROR > 0)
-				begin
-					rollback transaction tx
-					select -2 as rpta
-					return 
-				end
-			else 
-				begin 
-					commit transaction tx 
-					select 1 as  rpta
-				end
-				
+		begin 
+			select Id, StrName from tblUser where TeamFk is null or TeamFk = (select TeamFk from tblUser where id = @Id);
+		end				
 end
 go
+
+
+select * from tblUser
