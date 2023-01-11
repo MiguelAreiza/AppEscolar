@@ -90,7 +90,7 @@ $(document).ready(function() {
         
                 let users = (await response.json());
             
-                if (!data.rpta) {
+                if (!users.rpta) {
                     let html = ``;
 
                     for (let i = 0; i < users.length; i++) {
@@ -128,12 +128,15 @@ $(document).ready(function() {
                     }
 
                     if (data.length < 4) {
-                        // $('.usersTeam').hide();
-                        // $('.readings').hide();
-                        // $('.rolesTeam').hide();
-                        // setTimeout(() => {
-                        //     $('.usersTeam').show();
-                        // }, 154000);
+                        $('.usersTeam').hide();
+                        $('.readings').hide();
+                        $('.rolesTeam').hide();
+                        $('.videoTeam').attr('src', 'https://www.youtube.com/embed/1v6JZqNSF0o?controls=0&autoplay=1');
+                        setTimeout(() => {
+                            $('.usersTeam').show();
+                            $('.readings').show();
+                            $('.rolesTeam').show();
+                        }, 154000);
                     } else {
                         $('#cboFriend1').val(data[0].Id);
                         $('#cboFriend2').val(data[1].Id);

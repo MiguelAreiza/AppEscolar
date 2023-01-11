@@ -308,4 +308,4 @@ end
 go
 
 
-select * from tblUser
+select * from tblTeam

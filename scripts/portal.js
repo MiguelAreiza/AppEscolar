@@ -57,12 +57,18 @@ $(document).ready(()=>{
         if ($('#menu').css('height') == '0px') {
 
             $('#menu').css('height', 'calc(100% * 4)');
+            if (JSON.parse(sessionStorage.AppUser).RoleFk == 'e922ab89-6aa3-4835-ba6a-ce189f0eb74a') {
+                $('#adminMenu').css('height', 'calc(100% * 4)');
+            }
 
         }  else {
              
             $('#menu').css('height', '0px'); 
+            if (JSON.parse(sessionStorage.AppUser).RoleFk == 'e922ab89-6aa3-4835-ba6a-ce189f0eb74a') {
+                $('#adminMenu').css('height', '0px'); 
+            }
 
-        }     
+        }
         
     });
 

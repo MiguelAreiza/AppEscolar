@@ -10,7 +10,7 @@
 .navBar > .rigth > #btnSettings{
     background-image: url('../Images/Botones/Setting.png');
 }
-.navBar > .rigth > #menu{
+.navBar > .rigth > .menu{
     background: #000;
     width: 12vh;
     height: 0px;
@@ -25,7 +25,7 @@
     align-items: center;
     transition: 1s;
 }
-.navBar > .rigth > #menu > button{
+.navBar > .rigth > .menu > button{
     width: 10vh;
     height: 10vh;
     background: #999;
@@ -35,7 +35,10 @@
     border-radius: 2vh;
     margin: 1vh;
 }
-.navBar > .rigth > #menu > button:hover{
+#adminMenu{
+    right: 13vh;
+}
+.navBar > .rigth > .menu > button:hover{
     background: #777;
     background-repeat: no-repeat;
     background-position: center;
@@ -57,6 +60,10 @@
 .navBar > .rigth > #menu > #btnPoderes,
 .navBar > .rigth > #menu > #btnPoderes:hover{
     background-image: url('../Images/IconosMenu/Poderes.png');
+}
+.navBar > .rigth > #adminMenu > button,
+.navBar > .rigth > #adminMenu > button:hover{
+    background-image: url('../Images/IconosMenu/Admin.png');
 }
 
 /* Estilos del pagecontent */
